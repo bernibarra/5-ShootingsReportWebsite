@@ -1,0 +1,44 @@
+# Geocode addresses: based on the following blog post
+# http://www.storybench.org/geocode-csv-addresses-r/
+
+# Use dev version of ggmaps so that you can set the Google Maps API key
+# devtools::install_github("dkahle/ggmap")
+library(ggmap)
+library(dplyr)
+
+
+# Load and google maps API key (you'll need to get your own)
+source("api_key.R")
+register_google(key = google_key)
+
+# Load the raw data
+library(ggmap)
+raw_data <- read.csv("data/raw-shootings-2018.csv", stringsAsFactors = F) %>%
+  mutate(
+    lat = 0,
+    long = 0
+  )
+
+# Loop through the addresses to get the latitude and longitude of each address,
+# then add it to the raw_data data frame in new columns lat and lng
+for (i in 1:nrow(raw_data)) {
+  # Print("Working...")
+  result <- geocode(raw_data$Address[i], output = "latlona", source = "google")
+  raw_data$long[i] <- as.numeric(result[1])
+  raw_data$lat[i] <- as.numeric(result[2])
+}
+
+# Rename columns
+data <- raw_data %>%
+  select(
+    date = Incident.Date,
+    state = State,
+    city = City.Or.County,
+    address = Address,
+    num_killed = X..Killed,
+    num_injured = X..Injured, 
+    lat, lng
+  )
+
+# Write a CSV file containing raw_data to the working directory
+write.csv(data, "data/shootings-2018.csv", row.names = FALSE)

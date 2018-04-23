@@ -1,0 +1,68 @@
+"date","state","city","address","num_killed","num_injured","lat","lng"
+"April 22, 2018","Tennessee","Antioch","3571 Murfreesboro Pike",4,4,36.0507688,-86.615644
+"April 20, 2018","California","San Francisco","3rd Street and Quesada Ave",1,5,37.7332329,-122.3913453
+"April 18, 2018","North Carolina","Asheville","73 Hansel Ave",4,3,35.591598,-82.583641
+"April 15, 2018","Louisiana","Shreveport","6956 Jewella Ave",0,6,32.4424832,-93.7977287
+"April 9, 2018","California","Vallejo","201 Maine St",0,4,38.098153,-122.257536
+"April 8, 2018","North Carolina","Hickory","247 1st Ave NW",1,3,36.4236359,-94.4532518
+"April 8, 2018","Florida","Miami","1300 block of NW 63rd Terrace",2,2,25.8336233,-80.2187766
+"April 6, 2018","Florida","Jacksonville","6100 block of Transylvania Ave",0,4,30.2491221,-81.7412227
+"April 6, 2018","Virginia","Virginia Beach","5800 block of Pickering St",1,3,36.8585948,-76.1777493
+"April 4, 2018","Louisiana","New Orleans","3300 Garden Oaks Drive",2,2,29.92052,-90.0053552
+"April 2, 2018","Texas","Houston","8500 block of Redcliff Rd",1,3,29.9040315,-95.5223951
+"April 1, 2018","Alabama","Mobile","3556 Halls Mill Rd",1,4,30.6387232,-88.1228468
+"April 1, 2018","Michigan","Saginaw","600 block of Yale St",0,5,29.7814645,-95.3987912
+"March 31, 2018","New Jersey","Asbury Park","Atlantic Ave and Monmouth Ave",0,5,40.4447565,-74.1182783
+"March 29, 2018","Texas","Plano","7401 Alma Dr",1,3,33.0766655,-96.7123172
+"March 29, 2018","New Jersey","Camden","Kaighn Ave and Haddon Ave",0,4,39.9320891,-75.1027195
+"March 24, 2018","Utah","Salt Lake City (West Valley City)","3180 South 5600 West",0,4,40.7020779,-112.026079
+"March 21, 2018","California","San Francisco","949 Geneva Ave",1,5,37.7162639,-122.4402435
+"March 17, 2018","Kentucky","Louisville","2928 W Kentucky St",0,7,38.2436354,-85.8024211
+"March 17, 2018","Illinois","Harvey","16700 S Halsted St",0,4,41.5867713,-87.6371847
+"March 13, 2018","Florida","Macclenny","South Blvd",0,4,35.1614848,-80.8760694
+"March 12, 2018","California","Modesto","2000 block of Robertson Rd",0,4,37.6130272,-121.0234645
+"March 11, 2018","Illinois","Champaign","700 block of N Hickory St",1,3,41.5364663,-88.0866985
+"March 11, 2018","Michigan","Saginaw","Cumberland Ave and Hess St",0,5,43.4003423,-83.9092369
+"March 9, 2018","North Carolina","Wadesboro","1300 E Caswell St",3,1,34.9626681,-80.0531649
+"March 9, 2018","Indiana","South Bend","800 block of E Dayton St",0,6,43.0825665,-89.3771141
+"March 7, 2018","Alabama","Hurtsboro","531 Main Street",2,2,41.6660525,-70.1627205
+"March 4, 2018","Illinois","Rockford","400 Howard Ave",1,4,40.5735474,-74.5032861
+"March 3, 2018","Florida","Miami","1300 Block of NW 62nd Ln",0,4,25.8324607,-80.2187015
+"March 3, 2018","New York","Brooklyn","Kings Highway and Utica Avenue",1,3,40.6341411,-73.9285039
+"February 27, 2018","Connecticut","Bridgeport","1306 Stratford Ave",0,4,36.2134305,-86.7240919
+"February 26, 2018","Michigan","Detroit","22000 block of Fenkell Ave",5,0,42.400512,-83.2570719
+"February 23, 2018","Florida","Palm Beach Gardens (Riviera Beach)","W 23rd St",1,3,40.7452994,-73.9984832
+"February 18, 2018","Texas","San Antonio","2893 Cinema Ridge",0,5,29.4632441,-98.6204053
+"February 17, 2018","Kansas","Kansas City","1615 Minnesota",1,7,40.0196191,-82.9677769
+"February 17, 2018","Tennessee","Memphis","3188 N Watkins Ave",0,5,35.2127003,-90.0031329
+"February 16, 2018","Oklahoma","Oklahoma City","S Pennsylvania Ave and SW 15th St",1,3,35.449699,-97.5480139
+"February 14, 2018","Florida","Pompano Beach (Parkland)","5901 Pine Island Rd",17,17,26.304503,-80.269457
+"February 13, 2018","Louisiana","New Orleans","5400 block of Andry Street",2,3,29.9665222,-90.0169389
+"February 11, 2018","Michigan","Detroit","19432 Lamont Street",4,3,42.4377773,-83.0548264
+"February 10, 2018","Kentucky","Paintsville","413 Mill Street",5,0,43.0008754,-91.6547538
+"February 7, 2018","Florida","Lake Worth (Lantana)","I-95 and Lantana Ave",3,3,26.5874127,-80.0682809
+"February 5, 2018","Colorado","Colorado Springs","4225 Galley Rd",2,4,38.8469465,-104.7500638
+"February 3, 2018","Ohio","Cleveland (Garfield Heights)","11321 Broadway Ave",1,5,41.4335949,-81.6050264
+"January 31, 2018","Missouri","Saint Louis","Goodfellow Blvd and Dr Martin Luther King Dr",0,4,38.6720756,-90.2793779
+"January 28, 2018","Pennsylvania","Melcroft","1301 Indian Creek Valley Rd",5,0,40.0520845,-79.3889
+"January 28, 2018","Pennsylvania","Reading","123 S 3rd St",4,0,41.5851925,-85.8364258
+"January 28, 2018","Indiana","Indianapolis","1313 N Sherman Dr",2,3,39.7851444,-86.1018298
+"January 27, 2018","California","Los Angeles","243 East 119th St",0,5,33.924875,-118.2702264
+"January 27, 2018","Kentucky","Bowling Green","645 Pearl Street",0,4,40.016775,-105.286874
+"January 25, 2018","District of Columbia","Washington","1600 block of Kenilworth Ave NE",0,4,38.9112518,-76.9352939
+"January 23, 2018","Pennsylvania","Philadelphia","N 24th St and Ridge Ave",0,4,39.9816628,-75.1739
+"January 23, 2018","Kentucky","Benton","416 High School Road",2,14,36.9128027,-88.3327633
+"January 21, 2018","Florida","Orlando","3101 Willow Bend Blvd",0,4,28.582257,-81.4441609
+"January 21, 2018","Illinois","Chicago","3200 W Division St",0,4,32.733672,-97.161734
+"January 17, 2018","District of Columbia","Washington","2000 block of 16th St SE",1,3,38.8653278,-76.982177
+"January 16, 2018","South Carolina","York","3042 Farrier Lane",1,4,35.033686,-81.14493
+"January 15, 2018","Florida","Alachua","14223 NW 156th Pl",0,5,29.7984938,-82.4971302
+"January 14, 2018","Alabama","Eutaw","809 Mesopotamia St",1,4,32.8506341,-87.9025294
+"January 14, 2018","Alabama","Madison","101 Westchester Dr",0,4,34.6741315,-86.7597356
+"January 12, 2018","Tennessee","Nashville","2614 Jenkins Ct",3,2,36.1820035,-86.8204455
+"January 11, 2018","Missouri","Saint Robert (St Robert)","St Robert Outer Road and Houston Road",2,2,37.831855,-92.1035309
+"January 7, 2018","Alabama","Union Springs","U.S. Highway 29",1,5,34.9267649,-82.3012478
+"January 7, 2018","Florida","Plantation","5225 W Broward Blvd",0,4,26.1219053,-80.2188382
+"January 5, 2018","Mississippi","Hattiesburg","6168 US 49",0,6,31.3268935,-89.3285078
+"January 4, 2018","Arkansas","Brinkley","615 W 6th St",1,3,34.0848902,-117.6587707
+"January 1, 2018","Alabama","Huntsville","2025 Sparkman Dr NW",1,3,34.7628076,-86.5945567
