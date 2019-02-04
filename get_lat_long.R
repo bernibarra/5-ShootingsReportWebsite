@@ -1,5 +1,7 @@
 # Geocode addresses: based on the following blog post
 # http://www.storybench.org/geocode-csv-addresses-r/
+# NO NEED to run this script -- it is only included in case you are 
+# curious how the lat/long were computed using the address
 
 # Use dev version of ggmaps so that you can set the Google Maps API key
 # devtools::install_github("dkahle/ggmap")
@@ -7,8 +9,8 @@ library(ggmap)
 library(dplyr)
 
 
-# Load and google maps API key (you'll need to get your own)
-source("api_key.R")
+# Load and google maps API key (you'll need to get your own to run the script)
+# source("api_key.R")
 register_google(key = google_key)
 
 # Load the raw data
@@ -16,17 +18,12 @@ library(ggmap)
 raw_data <- read.csv("data/raw-shootings-2018.csv", stringsAsFactors = F) %>%
   mutate(
     lat = 0,
-    long = 0
+    long = 0, 
+    city_state = paste0(City.Or.County, ", ", State)
   )
 
-# Loop through the addresses to get the latitude and longitude of each address,
-# then add it to the raw_data data frame in new columns lat and lng
-for (i in 1:nrow(raw_data)) {
-  # Print("Working...")
-  result <- geocode(raw_data$Address[i], output = "latlona", source = "google")
-  raw_data$long[i] <- as.numeric(result[1])
-  raw_data$lat[i] <- as.numeric(result[2])
-}
+# Get addresses using the geocode function
+raw_data[, c("long", "lat")] <- geocode(raw_data$city_state)
 
 # Rename columns
 data <- raw_data %>%
@@ -37,7 +34,7 @@ data <- raw_data %>%
     address = Address,
     num_killed = X..Killed,
     num_injured = X..Injured, 
-    lat, lng
+    lat, long
   )
 
 # Write a CSV file containing raw_data to the working directory
