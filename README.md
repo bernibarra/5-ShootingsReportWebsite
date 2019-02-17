@@ -6,6 +6,3 @@ Please **edit this README.md** file to include a link to your hosted report (thi
 
 ## Live Website
 https://info201b-w19.github.io/a5-bernibarra/index.html
-
-### Github Repository
-https://github.com/info201b-w19/a5-bernibarra
