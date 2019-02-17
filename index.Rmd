@@ -53,15 +53,10 @@ source("analysis.R")
 ## Summary information
 ################################################################################
 
-### How many shootings occurred?
-nums shootings:
-`r num_shootings`
+### About the dataset
 
-### The number of lives lost were:
-`r lives_lost`
+The 2018 Mass Shootings dataset describes events in where people were killed or injured by a gunner. The 2018 total observed shootings are **`r num_shootings`** , where the mean injuries were **`r mean_injured`**, with a max of **`r lives_injured`** and the mean deaths were **`r mean_lost`**, with a max of **`r lives_lost`** . Altogether, the impact, represented by the total **`r dead_and_injured`** , directly affected dead_and_injured people; not to mention the victim's loved ones.
 
-### The total lives impacted(injuries + deaths) were:
-`r lives_injured + lives_lost`
 
 ### The most impacted cities were:
 `r most_impacted_cities`.
@@ -69,20 +64,12 @@ nums shootings:
 ### The most impacted states were:
 `r most_impacted_states`
 
-<!-- # Data in this paragraph should reference values that you calculate in R, and -->
-<!-- # should not simply be typed as text into the paragraph. -->
-
 
 ################################################################################
 ## Summary Table
 ################################################################################
-<!-- # To show a set of quantitative values to your user, you should include a well -->
-<!-- # formatted summary table of your interest. This should not just be the raw data, -->
-<!-- # but instead should an aggregate table of information. How you would like to -->
-<!-- # aggregate the information (by city, state, month, day of the week, etc.) is up -->
-<!-- # to you. Make sure to include accompanying text that describes the important -->
 
-paragraph.
+The following table summarizes the states with the highest number of injured people. It describes the exact location where the incident took place, and those killed or injured. To represent these findings, the dataset was first reduced to only these variable names. Then the table was arranged by the number of injured people, in descending order. The highest injuries happened in **`r summary_table[1,2:1]`**.
 
 ### Most Injured People
 ```{r}
@@ -93,51 +80,39 @@ kable(summary_table, row.names = NA, col.names = c("State", "City", "People Kill
 ################################################################################
 ## Particular incident
 ################################################################################
-<!-- # Your report will include a paragraph (4+ sentences) of in-depth information -->
-<!-- # about a particular (single) incident. You should provide your reader with -->
-<!-- # relevant information from the dataset, such as the date and location of the -->
-<!-- # incident, as well as the number of people impacted (injured, killed). You -->
-<!-- # should include a link to at least one outside resource (not found in the data). -->
-<!-- # Data in this paragraph should reference values that you calculate in R, and -->
-<!-- # should not simply be typed as text into the paragraph. -->
 
-Paragraph.
+On **`r most_killed_incident[1,1]`**, The Parkland, Florida High School(**`r most_killed_incident[1,4]`**) suffered an unpresendented loss of life. The gunner, _Nikolas Cruz_, had already made threats using  social media but unfortunately was not arrest sooner. Ultimately, **`r most_killed_incident[1,5]`** were lost, which along with the injurires totaled to an incredible **`r (most_killed_incident[1,5] + most_killed_incident[1,6])`** "impacted" victims.
+
+Credit: [NYT: Death Toll Is at 17 and Could Rise in Florida School Shooting](https://www.nytimes.com/2018/02/14/us/parkland-school-shooting.html)
+![Credit: The Newyork Times](imgs/NYT_Parkland_Shooting.jpg)
 
 ### The following incident has the highest deaths observed.
 ```{r paged.print=TRUE}
 kable(most_killed_incident, row.names = NA, col.names = c("Date", "State", "City", "Address", "People Killed", "People Injured"), caption = "*The following incident calculated the max value of people killed")
 ```
 
+
 ################################################################################
 ## Interactive map
 ################################################################################
-<!-- # While maps are not always the most appropriate visual representation of -->
-<!-- # geographic data, they are extraordinarily popular and attract broad audiences. -->
-<!-- # You'll build an interactive map that shows a marker at the location of each -->
-<!-- # shooting. On your map, manipulate the appearance (size, color, etc.) of the -->
-<!-- # markers based on the underlying dataset (# injured, # killed, etc.). The map -->
-<!-- # should be appropriately labeled, and detailed information should be shown to -->
-<!-- # the user when they hover over each point. Choice of plotting library is up to -->
-<!-- # you, though I suggest you consult the interactive visualization chapter of the -->
-<!-- # book -- remember, the map must be interactive, so ggplot2 is probably not the -->
-<!-- # best choice. -->
+
+The map below shows all the observations of the 2018 Mass Shootings dataset using points on the continental USA. Here, every point represents an incident where the size is proportioned by the total lives lost at the given location. There are 4 major locations where 10 or more people were killed. Each point, once clicked, shows the date and the total people killed or injured.
+
+**Click the points to interact with the map**
+
+``` {r}
+interactive_map
+```
 
 
 ################################################################################
 ## A plot of your choice
 ################################################################################
-<!-- # In addition to the interactive map, you will build an additional plot of your -->
-<!-- # choice. You can do this using the package of your choice, such as ggplot2, -->
-<!-- # plotly, bokeh, or others. As you create your chart, be sure to consider what -->
-<!-- # questions it answers for your audience. Similarly to your map, you should -->
-<!-- # integrate your plot seamlessly with the rest of your report, and -->
-<!-- # reference/describe it in your text. Regardless of library, the chart should -->
-<!-- # have meaningful and clear title, axis labels, and legend (if appropriate). -->
-<!-- # -->
-<!-- # You should provide a defense of why you chose the chart by highlighting the -->
-<!-- # insights gained from the chart you build. -->
+
+Here, the impact (deaths and injuries) of shootings across all 12 months is represented by a bar graph. The Y asix is the amount of victims of either injurires or deaths and the X axis is the months of the year. While, a timeline could have shown the monthly trend of impacted people, it would have been less apparent to compare the number of people killed with the total impact. So, the legend of people killed, to the right, is useful since it indicates what months had the most deaths, compared to injuries.
+
 ``` {r}
-shootings_months_bargraph
+shootings_months_graph
 ```
 
 

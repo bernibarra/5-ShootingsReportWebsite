@@ -9,7 +9,7 @@
 
 # Install (if not installed) + load dplyr package
 library(dplyr)
-library(ggplot2)
+library(tidyverse)
 library(leaflet)
 library(rmarkdown)
 library(tidyr)
@@ -32,12 +32,15 @@ shootings_2018 <- read.csv("data/shootings-2018.csv", stringsAsFactors = F)
 ### How many shootings occurred? 
 num_shootings <- nrow(shootings_2018)
 
-### How many lives were lost?  1720
+### How many lives were lost? 
 lives_lost <- sum(shootings_2018$num_killed)
 lives_injured <- sum(shootings_2018$num_injured)
 
-dead_and_injured <- lives_lost + lives_injured
+dead_and_injured <- lives_lost + lives_injured #1720
 
+# Means
+mean_lost <- round(mean(shootings_2018$num_killed), 1)
+mean_injured <- round(mean(shootings_2018$num_injured), 1)
 
 ### Which cities were most impacted (you can decide how to measure "impact")?
 most_impacted_cities <- shootings_2018 %>% 
@@ -102,7 +105,20 @@ most_killed_incident <- shootings_2018 %>%
 # book -- remember, the map must be interactive, so ggplot2 is probably not the 
 # best choice.
 
-# leaflet
+locations <- shootings_2018 %>%
+  select(date, num_killed, num_injured, lati = lat, long)
+
+interactive_map <- leaflet(data = locations) %>% # specify the data
+  addProviderTiles("CartoDB.Positron") %>%
+  setView(lng = -98, lat = 38, zoom = 4) %>% # focus on middle US
+  addCircles(
+    lat = ~ lati,    # specifying the column to use for latitude
+    lng = ~ long,    # specifying the column to use for longitude
+    popup = ~ paste0(date, "<br>", "People injured: ", num_injured, "<br>", 
+    "People Killed: ", num_killed),    # specifying the information to pop up
+    radius = (locations$num_killed * 10000),    # radius for the circles
+    stroke = FALSE     # remove the outline from each circle
+  )
 
 ################################################################################
 # A plot of your choice
@@ -122,10 +138,11 @@ notable_dates <- shootings_2018 %>%
   select(date, num_killed, num_injured) %>% 
   mutate(date = mdy(date)) %>% 
   separate(date, sep="-", into = c("year", "months", "day")) %>% 
-  group_by(months) %>% 
-  summarise(sum = sum(num_killed))
+  group_by(months)
 
-shootings_months_bargraph <- ggplot(notable_dates, aes(x = months, y = sum, color = months)) + geom_col() +
-  labs(title = "Impactful Shootings Across Months", caption = 
+shootings_months_graph <- ggplot(notable_dates, aes(x = months, y = num_injured, 
+  fill = num_killed)) + geom_col() + 
+  labs(title = "Impact Shootings Across Months", 
+  fill = "People \n Killed", caption = 
   "*Impacted*, represents the sum of number of people injured and killed", 
   x = "Months", y = "Total Impacted")
