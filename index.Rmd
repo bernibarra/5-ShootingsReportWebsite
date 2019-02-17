@@ -73,7 +73,11 @@ The following table summarizes the states with the highest number of injured peo
 
 ### Most Injured People
 ```{r}
-kable(summary_table, row.names = NA, col.names = c("State", "City", "People Killed", "People Injured"), caption = '*The following table is arranged by descending injuries')
+kable(summary_table, row.names = NA, col.names = c(
+  "State", "City",
+  "People Killed", "People Injured"
+), caption = "*The following table is arranged
+by descending injuries")
 ```
 
 
@@ -88,7 +92,11 @@ Credit: [NYT: Death Toll Is at 17 and Could Rise in Florida School Shooting](htt
 
 ### The following incident has the highest deaths observed.
 ```{r paged.print=TRUE}
-kable(most_killed_incident, row.names = NA, col.names = c("Date", "State", "City", "Address", "People Killed", "People Injured"), caption = "*The following incident calculated the max value of people killed")
+kable(most_killed_incident, row.names = NA, col.names = c(
+  "Date", "State",
+  "City", "Address", "People Killed", "People Injured"
+), caption = "*The following
+incident calculated the max value of people killed")
 ```
 
 
@@ -115,4 +123,4 @@ Here, the impact (deaths and injuries) of shootings across all 12 months is repr
 shootings_months_graph
 ```
 
-
+Thanks for reading!

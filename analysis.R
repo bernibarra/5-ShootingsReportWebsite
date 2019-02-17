@@ -1,7 +1,7 @@
 # title: a5 Data Report
 # subtitle: "Mass Shootings 2018"
 # author: "Bernabe Ibarra"
-# date: "2019-02-16"
+# date: 20190216
 
 ################################################################################
 # Setup
@@ -18,11 +18,8 @@ library(lubridate)
 # Read in `shootings-2018.csv` data using a *relative path*
 shootings_2018 <- read.csv("data/shootings-2018.csv", stringsAsFactors = F)
 
-# str(shootings_2018)
-# View(shootings_2018)
-
 ################################################################################
-# Summary information
+#Summary information
 ################################################################################
 # To start your report, you should summarize relevant features of your dataset. 
 # Write a paragraph providing a high-level overview of shootings in the US, 
@@ -43,20 +40,20 @@ mean_lost <- round(mean(shootings_2018$num_killed), 1)
 mean_injured <- round(mean(shootings_2018$num_injured), 1)
 
 ### Which cities were most impacted (you can decide how to measure "impact")?
-most_impacted_cities <- shootings_2018 %>% 
-  mutate(death_and_injuries = num_killed + num_injured) %>% 
+most_impacted_cities <- shootings_2018 %>%
+  mutate(death_and_injuries = num_killed + num_injured) %>%
   arrange(-death_and_injuries) %>%
   top_n(5) %>%
   pull(city)
 
 ### At least one other insight of your choice.
-most_impacted_states <- shootings_2018 %>% 
-  select(state, num_killed, num_injured) %>% 
-  group_by(state) %>% 
-  summarise_all(sum) %>% 
-  mutate(state_death_and_injuries = num_killed + num_injured) %>% 
+most_impacted_states <- shootings_2018 %>%
+  select(state, num_killed, num_injured) %>%
+  group_by(state) %>%
+  summarise_all(sum) %>%
+  mutate(state_death_and_injuries = num_killed + num_injured) %>%
   arrange(-state_death_and_injuries) %>%
-  top_n(5) %>% 
+  top_n(5) %>%
   pull(state)
 
 # Data in this paragraph should reference values that you calculate in R, and 
@@ -72,9 +69,9 @@ most_impacted_states <- shootings_2018 %>%
 # to you. Make sure to include accompanying text that describes the important 
 # insights from the table. 
 
-summary_table <- shootings_2018 %>% 
+summary_table <- shootings_2018 %>%
   select(state, city, num_killed, num_injured) %>%
-  arrange(-num_injured) %>% 
+  arrange(-num_injured) %>%
   top_n(6)
 
 ################################################################################
@@ -87,8 +84,9 @@ summary_table <- shootings_2018 %>%
 # should include a link to at least one outside resource (not in the data). 
 # Data in this paragraph should reference values that you calculate in R, and 
 # should not simply be typed as text into the paragraph.
+
 most_killed_incident <- shootings_2018 %>%
-  filter(num_killed == max(num_killed)) %>% 
+  filter(num_killed == max(num_killed)) %>%
   select(-lat, -long)
 
 ################################################################################
@@ -114,7 +112,7 @@ interactive_map <- leaflet(data = locations) %>% # specify the data
   addCircles(
     lat = ~ lati,    # specifying the column to use for latitude
     lng = ~ long,    # specifying the column to use for longitude
-    popup = ~ paste0(date, "<br>", "People injured: ", num_injured, "<br>", 
+    popup = ~ paste0(date, "<br>", "People injured: ", num_injured, "<br>",
     "People Killed: ", num_killed),    # specifying the information to pop up
     radius = (locations$num_killed * 10000),    # radius for the circles
     stroke = FALSE     # remove the outline from each circle
@@ -134,15 +132,13 @@ interactive_map <- leaflet(data = locations) %>% # specify the data
 # You should provide a defense of why you chose the chart by highlighting the 
 # insights gained from the chart you build.
 
-notable_dates <- shootings_2018 %>% 
-  select(date, num_killed, num_injured) %>% 
-  mutate(date = mdy(date)) %>% 
-  separate(date, sep="-", into = c("year", "months", "day")) %>% 
+notable_dates <- shootings_2018 %>%
+  select(date, num_killed, num_injured) %>%
+  mutate(date = mdy(date)) %>%
+  separate(date, sep = "-", into = c("year", "months", "day")) %>%
   group_by(months)
 
-shootings_months_graph <- ggplot(notable_dates, aes(x = months, y = num_injured, 
-  fill = num_killed)) + geom_col() + 
-  labs(title = "Impact Shootings Across Months", 
-  fill = "People \n Killed", caption = 
-  "*Impacted*, represents the sum of number of people injured and killed", 
-  x = "Months", y = "Total Impacted")
+shootings_months_graph <- ggplot(notable_dates, aes(x = months, y = num_injured,
+  fill = num_killed)) + geom_col() + labs(title = "Shootings Across Months",
+  fill = "People \n Killed", caption = "*Impacted*, represents the sum
+  of number of people injured and killed", x = "Months", y = "Total Impacted")
