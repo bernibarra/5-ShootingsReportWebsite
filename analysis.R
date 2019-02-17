@@ -1,6 +1,7 @@
-# a5 Data Report
-
-# comments
+# title: a5 Data Report
+# subtitle: "Mass Shootings 2018"
+# author: "Bernabe Ibarra"
+# date: "2019-02-16"
 
 ################################################################################
 # Setup
@@ -8,6 +9,11 @@
 
 # Install (if not installed) + load dplyr package
 library(dplyr)
+library(ggplot2)
+library(leaflet)
+library(rmarkdown)
+library(tidyr)
+library(lubridate)
 
 # Read in `shootings-2018.csv` data using a *relative path*
 shootings_2018 <- read.csv("data/shootings-2018.csv", stringsAsFactors = F)
@@ -19,30 +25,36 @@ shootings_2018 <- read.csv("data/shootings-2018.csv", stringsAsFactors = F)
 # Summary information
 ################################################################################
 # To start your report, you should summarize relevant features of your dataset. 
-# Write a paragraph providing a high-level overview of shootings in the US, based 
-# on the dataset. This should provide your reader with a sense of scale of the 
-# issue such as:
+# Write a paragraph providing a high-level overview of shootings in the US, 
+# based on the dataset. This should provide your reader with a sense of scale of 
+# the issue such as:
 
-# How many shootings occurred? 
+### How many shootings occurred? 
 num_shootings <- nrow(shootings_2018)
 
-# How many lives were lost?  1720
+### How many lives were lost?  1720
 lives_lost <- sum(shootings_2018$num_killed)
+lives_injured <- sum(shootings_2018$num_injured)
 
-# Which cities that were most impacted (you can decide how to measure "impact")?
-most_impacted_city <- shootings_2018 %>% 
+dead_and_injured <- lives_lost + lives_injured
+
+
+### Which cities were most impacted (you can decide how to measure "impact")?
+most_impacted_cities <- shootings_2018 %>% 
   mutate(death_and_injuries = num_killed + num_injured) %>% 
   arrange(-death_and_injuries) %>%
-  top_n(5)
+  top_n(5) %>%
+  pull(city)
 
-# At least one other insight of your choice.
-most_impacted_state <- shootings_2018 %>% 
+### At least one other insight of your choice.
+most_impacted_states <- shootings_2018 %>% 
   select(state, num_killed, num_injured) %>% 
   group_by(state) %>% 
   summarise_all(sum) %>% 
   mutate(state_death_and_injuries = num_killed + num_injured) %>% 
   arrange(-state_death_and_injuries) %>%
-  top_n(5)
+  top_n(5) %>% 
+  pull(state)
 
 # Data in this paragraph should reference values that you calculate in R, and 
 # should not simply be typed as text into the paragraph.
@@ -51,15 +63,16 @@ most_impacted_state <- shootings_2018 %>%
 # Summary Table
 ################################################################################
 # To show a set of quantitative values to your user, you should include a well 
-# formatted summary table of your interest. This should not just be the raw data, 
+# formatted summary table of your interest. This should not just be raw data, 
 # but instead should an aggregate table of information. How you would like to 
 # aggregate the information (by city, state, month, day of the week, etc.) is up 
 # to you. Make sure to include accompanying text that describes the important 
 # insights from the table. 
 
 summary_table <- shootings_2018 %>% 
-  select(state, city, num_killed, num_injured) %>% 
-  top_n(10)
+  select(state, city, num_killed, num_injured) %>%
+  arrange(-num_injured) %>% 
+  top_n(6)
 
 ################################################################################
 # Description of a particular incident
@@ -68,11 +81,12 @@ summary_table <- shootings_2018 %>%
 # about a particular (single) incident. You should provide your reader with 
 # relevant information from the dataset, such as the date and location of the 
 # incident, as well as the number of people impacted (injured, killed). You 
-# should include a link to at least one outside resource (not found in the data). 
+# should include a link to at least one outside resource (not in the data). 
 # Data in this paragraph should reference values that you calculate in R, and 
 # should not simply be typed as text into the paragraph.
 most_killed_incident <- shootings_2018 %>%
-  filter(num_killed == max(num_killed))
+  filter(num_killed == max(num_killed)) %>% 
+  select(-lat, -long)
 
 ################################################################################
 # An interactive map
@@ -104,4 +118,14 @@ most_killed_incident <- shootings_2018 %>%
 # You should provide a defense of why you chose the chart by highlighting the 
 # insights gained from the chart you build.
 
-# ggplot2
+notable_dates <- shootings_2018 %>% 
+  select(date, num_killed, num_injured) %>% 
+  mutate(date = mdy(date)) %>% 
+  separate(date, sep="-", into = c("year", "months", "day")) %>% 
+  group_by(months) %>% 
+  summarise(sum = sum(num_killed))
+
+shootings_months_bargraph <- ggplot(notable_dates, aes(x = months, y = sum, color = months)) + geom_col() +
+  labs(title = "Impactful Shootings Across Months", caption = 
+  "*Impacted*, represents the sum of number of people injured and killed", 
+  x = "Months", y = "Total Impacted")

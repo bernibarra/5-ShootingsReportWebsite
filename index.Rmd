@@ -1,11 +1,143 @@
 ---
-title: "report"
+title: "a5 Data Report"
+subtitle: "Mass Shootings"
 author: "Bernabe Ibarra"
+date: "2019-02-16"
 output:
   html_document:
     toc: TRUE
+    toc_float: 
+      smooth_scroll: TRUE
 ---
 
-# Report
+<style>
+body{
+  font-family: 'Verdana', Georgia;
+  font-size: 15px;
+  line-height: 25px;
+}
 
-## Subheading
+h1,h3,h4 {
+  font-family: 'Helvetica', Georgia;
+}
+
+h1{
+  background-color: gray;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 4px #000000;
+  font-family: 'Impact', Georgia;
+  padding: 20px;
+  text-align: center;
+}
+
+.container { width: 1000px; }
+
+h2{
+  background-color: #337ab7;
+  color: #FFFFFF;
+  font-family: 'Heletica', Georgia;
+  text-shadow: 1px 1px 2px #000000;
+  font-weight: bolder;
+  text-indent: 100px; 
+}
+</style>
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = F)
+source("analysis.R")
+```
+
+
+################################################################################
+## Summary information
+################################################################################
+
+### How many shootings occurred?
+nums shootings:
+`r num_shootings`
+
+### The number of lives lost were:
+`r lives_lost`
+
+### The total lives impacted(injuries + deaths) were:
+`r lives_injured + lives_lost`
+
+### The most impacted cities were:
+`r most_impacted_cities`.
+
+### The most impacted states were:
+`r most_impacted_states`
+
+<!-- # Data in this paragraph should reference values that you calculate in R, and -->
+<!-- # should not simply be typed as text into the paragraph. -->
+
+
+################################################################################
+## Summary Table
+################################################################################
+<!-- # To show a set of quantitative values to your user, you should include a well -->
+<!-- # formatted summary table of your interest. This should not just be the raw data, -->
+<!-- # but instead should an aggregate table of information. How you would like to -->
+<!-- # aggregate the information (by city, state, month, day of the week, etc.) is up -->
+<!-- # to you. Make sure to include accompanying text that describes the important -->
+
+paragraph.
+
+### Most Injured People
+```{r}
+kable(summary_table, row.names = NA, col.names = c("State", "City", "People Killed", "People Injured"), caption = '*The following table is arranged by descending injuries')
+```
+
+
+################################################################################
+## Particular incident
+################################################################################
+<!-- # Your report will include a paragraph (4+ sentences) of in-depth information -->
+<!-- # about a particular (single) incident. You should provide your reader with -->
+<!-- # relevant information from the dataset, such as the date and location of the -->
+<!-- # incident, as well as the number of people impacted (injured, killed). You -->
+<!-- # should include a link to at least one outside resource (not found in the data). -->
+<!-- # Data in this paragraph should reference values that you calculate in R, and -->
+<!-- # should not simply be typed as text into the paragraph. -->
+
+Paragraph.
+
+### The following incident has the highest deaths observed.
+```{r paged.print=TRUE}
+kable(most_killed_incident, row.names = NA, col.names = c("Date", "State", "City", "Address", "People Killed", "People Injured"), caption = "*The following incident calculated the max value of people killed")
+```
+
+################################################################################
+## Interactive map
+################################################################################
+<!-- # While maps are not always the most appropriate visual representation of -->
+<!-- # geographic data, they are extraordinarily popular and attract broad audiences. -->
+<!-- # You'll build an interactive map that shows a marker at the location of each -->
+<!-- # shooting. On your map, manipulate the appearance (size, color, etc.) of the -->
+<!-- # markers based on the underlying dataset (# injured, # killed, etc.). The map -->
+<!-- # should be appropriately labeled, and detailed information should be shown to -->
+<!-- # the user when they hover over each point. Choice of plotting library is up to -->
+<!-- # you, though I suggest you consult the interactive visualization chapter of the -->
+<!-- # book -- remember, the map must be interactive, so ggplot2 is probably not the -->
+<!-- # best choice. -->
+
+
+################################################################################
+## A plot of your choice
+################################################################################
+<!-- # In addition to the interactive map, you will build an additional plot of your -->
+<!-- # choice. You can do this using the package of your choice, such as ggplot2, -->
+<!-- # plotly, bokeh, or others. As you create your chart, be sure to consider what -->
+<!-- # questions it answers for your audience. Similarly to your map, you should -->
+<!-- # integrate your plot seamlessly with the rest of your report, and -->
+<!-- # reference/describe it in your text. Regardless of library, the chart should -->
+<!-- # have meaningful and clear title, axis labels, and legend (if appropriate). -->
+<!-- # -->
+<!-- # You should provide a defense of why you chose the chart by highlighting the -->
+<!-- # insights gained from the chart you build. -->
+``` {r}
+shootings_months_bargraph
+```
+
+
